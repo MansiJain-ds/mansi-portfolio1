@@ -75,3 +75,16 @@ window.addEventListener(
   },
   { passive: true }
 );
+// Smooth active nav highlight update on scroll
+window.addEventListener("scroll", () => {
+  document.querySelectorAll(".nav-links a").forEach(link => {
+    const section = document.querySelector(link.getAttribute("href"));
+    if (!section) return;
+
+    const rect = section.getBoundingClientRect();
+    if (rect.top <= 150 && rect.bottom >= 150) {
+      document.querySelectorAll(".nav-links a").forEach(l => l.classList.remove("active"));
+      link.classList.add("active");
+    }
+  });
+});
